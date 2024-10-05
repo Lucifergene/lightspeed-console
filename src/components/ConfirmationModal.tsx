@@ -11,21 +11,21 @@ const ConfirmationModal: React.FC<Props> = ({ handleRedirect }) => {
 
   return (
     <Modal
-      variant={ModalVariant.small}
-      title={t('Do you want to leave this page?')}
-      titleIconVariant="warning"
-      className="redirect-modal"
-      showClose={false}
-      isOpen={true}
-      aria-describedby="modal-title-icon-description"
       actions={[
-        <Button id="leave" variant="primary" onClick={handleRedirect}>
+        <Button id="leave" key="leave" onClick={handleRedirect} variant="primary">
           {t('Leave')}
         </Button>,
-        <Button id="stay" variant="link" onClick={handleRedirect}>
+        <Button id="stay" key="stay" onClick={handleRedirect} variant="link">
           {t('Stay')}
         </Button>,
       ]}
+      aria-describedby="modal-title-icon-description"
+      className="redirect-modal"
+      isOpen={true}
+      showClose={false}
+      title={t('Do you want to leave this page?')}
+      titleIconVariant="warning"
+      variant={ModalVariant.small}
     >
       {t('Changes you made may not be saved.')}
     </Modal>

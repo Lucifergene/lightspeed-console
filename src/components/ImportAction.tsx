@@ -38,10 +38,14 @@ const ImportAction: React.FC<Props> = ({ value }) => {
   };
 
   const handleClick = () => {
-    isImportYAMLPage ? history.replace(`${location.pathname}?ols=true`) : setShowModal(true);
+    if (isImportYAMLPage) {
+      history.replace(`${location.pathname}?ols=true`);
+    } else {
+      setShowModal(true);
+    }
     dispatch(
       importCodeblock({
-        value: value,
+        value,
         id: generateRandomNumericString(),
       }),
     );
@@ -51,18 +55,18 @@ const ImportAction: React.FC<Props> = ({ value }) => {
     <>
       {showModal && !isImportYAMLPage && <ConfirmationModal handleRedirect={handleRedirect} />}
       <Tooltip
+        aria="none"
+        aria-live="polite"
+        content={<div>{t('Import to console')}</div>}
         trigger="mouseenter focus click"
         triggerRef={triggerRef}
-        aria-live="polite"
-        aria="none"
-        content={<div>{t('Import to console')}</div>}
       >
         <Button
+          aria-label={t('Import to console')}
+          onClick={handleClick}
+          ref={triggerRef}
           type="button"
           variant={ButtonVariant.plain}
-          onClick={handleClick}
-          aria-label={t('Import to console')}
-          ref={triggerRef}
         >
           <PlusCircleIcon />
         </Button>
